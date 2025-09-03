@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Project 0 — Your Project Title</title>
+  <meta name="description" content="Brief description of Project 0." />
+  <style>
+    :root{
+      --bg: #f5f7fa;
+      --card: #ffffff;
+      --muted: #555b66;
+      --text: #1b1f24;
+      --accent: #4169e1;
+      --ring: rgba(65,105,225,.3);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--text);
+      background: radial-gradient(800px 500px at 20% -10%, #e0e8ff 0%, transparent 60%),
+                  radial-gradient(700px 400px at 120% -20%, #fbe6ff 0%, transparent 55%),
+                  var(--bg);
+      line-height:1.6;
+    }
+    a{color:var(--accent); text-decoration:none}
+    a:hover{ text-decoration:underline }
+
+    .container{ max-width: 1000px; margin: 0 auto; padding: 24px; }
+
+    header{
+      position: sticky; top:0; backdrop-filter: blur(6px);
+      background: linear-gradient(to bottom, rgba(245,247,250,.9), rgba(245,247,250,.7));
+      border-bottom: 1px solid rgba(0,0,0,.08);
+      z-index: 10;
+    }
+    .nav{ display:flex; align-items:center; gap:12px; padding: 12px 24px; }
+    .crumbs{ font-size:.9rem; color:var(--muted) }
+    .crumbs a{ color:var(--muted) }
+
+    .title{
+      margin: 28px 0 8px; font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 700;
+      letter-spacing:.3px;
+    }
+    .subtitle{ color:var(--muted); margin-bottom: 28px; }
+
+    .card{
+      background: var(--card);
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 18px; padding: 18px; box-shadow: 0 6px 20px rgba(0,0,0,.08);
+    }
+
+    .grid-2{
+      display:grid; gap:16px; grid-template-columns: repeat(2, minmax(0,1fr));
+    }
+    @media (max-width: 720px){ .grid-2{ grid-template-columns: 1fr; } }
+
+    figure{ margin:0; display:flex; flex-direction:column; gap:10px }
+    .img-wrap{
+      overflow:hidden; border-radius:14px; border:1px solid rgba(0,0,0,.08);
+      aspect-ratio: 16 / 10; display:block; background:#f0f2f7;
+    }
+    img{ width:100%; height:100%; object-fit:cover; display:block; transition: transform .35s ease; }
+    .img-wrap:hover img{ transform: scale(1.03); }
+    figcaption{ color:var(--muted); font-size:.9rem }
+
+    .section{ margin: 26px 0; }
+
+    .desc{ color: #333742; font-size:1.02rem; }
+    .desc p{ margin: 0 0 12px }
+    .desc ul{ margin: 10px 0 0 18px }
+
+    .hero{
+      border-radius: 22px; padding: 28px; position:relative; overflow:hidden;
+      background: linear-gradient(135deg, rgba(65,105,225,.08), rgba(255,255,255,.7));
+      border: 1px solid rgba(65,105,225,.2);
+    }
+
+    .badge{ display:inline-flex; align-items:center; gap:8px; font-size:.78rem; color:var(--muted);
+      padding: 6px 10px; border:1px solid rgba(0,0,0,.1); border-radius:999px; background:rgba(255,255,255,.6) }
+
+    .footer{ color:var(--muted); font-size:.9rem; margin-top:36px; text-align:center }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav container">
+      <div class="crumbs">↩︎ <a href="index.html">Back to Home</a></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero card">
+      <span class="badge">Project 0 • v1.0</span>
+      <h1 class="title">Project 0 — Your Project Title</h1>
+      <p class="subtitle">One‑line hook about what this project does or why it’s cool. Replace this with your own copy.</p>
+    </section>
+
+    <!-- First row of 2 images -->
+    <section id="media" class="section card">
+      <h2 style="margin:0 0 6px">Preview Shots</h2>
+      <p class="subtitle">Short placeholder description about the first preview images.</p>
+      <div class="grid-2">
+        <figure>
+          <a class="img-wrap" href="images/proj0-1.jpg" target="_blank" rel="noreferrer noopener">
+            <img src="images/proj0-1.jpg" alt="Project 0 screenshot 1 placeholder" />
+          </a>
+          <figcaption>Caption for image #1 (what we’re seeing).</figcaption>
+        </figure>
+        <figure>
+          <a class="img-wrap" href="images/proj0-2.jpg" target="_blank" rel="noreferrer noopener">
+            <img src="images/proj0-2.jpg" alt="Project 0 screenshot 2 placeholder" />
+          </a>
+          <figcaption>Caption for image #2 (context or result).</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Description block -->
+    <section class="section card">
+      <h2 style="margin:0 0 6px">Description</h2>
+      <p class="subtitle">Placeholder for a brief summary of the project’s purpose and design.</p>
+      <div class="desc">
+        <p><strong>What it is:</strong> Replace with a short overview of the goal, inspiration, and constraints.</p>
+        <p><strong>How it works:</strong> Summarize the approach/algorithm/stack. Mention key challenges + solutions.</p>
+        <ul>
+          <li>Tech: HTML/CSS/JS (or React, Python, etc.).</li>
+          <li>Notable feature #1 with a one‑liner.</li>
+          <li>Notable feature #2 with a one‑liner.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Second row of 2 images -->
+    <section class="section card">
+      <h2 style="margin:0 0 6px">More Visuals</h2>
+      <p class="subtitle">Short placeholder description about the second set of visuals.</p>
+      <div class="grid-2">
+        <figure>
+          <a class="img-wrap" href="images/proj0-3.jpg" target="_blank" rel="noreferrer noopener">
+            <img src="images/proj0-3.jpg" alt="Project 0 screenshot 3 placeholder" />
+          </a>
+          <figcaption>Caption for image #3.</figcaption>
+        </figure>
+        <figure>
+          <a class="img-wrap" href="images/proj0-4.jpg" target="_blank" rel="noreferrer noopener">
+            <img src="images/proj0-4.jpg" alt="Project 0 screenshot 4 placeholder" />
+          </a>
+          <figcaption>Caption for image #4.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Final GIF placeholder -->
+    <section class="section card">
+      <h2 style="margin:0 0 6px">Final Demo (GIF)</h2>
+      <p class="subtitle">Placeholder description for the final demo animation.</p>
+      <figure>
+        <a class="img-wrap" href="images/proj0-demo.gif" target="_blank" rel="noreferrer noopener" style="aspect-ratio: 16/9;">
+          <img src="images/proj0-demo.gif" alt="Animated demo of Project 0 (placeholder)" />
+        </a>
+        <figcaption>Drop your final animated demo here (e.g., a quick workflow run‑through).</figcaption>
+      </figure>
+    </section>
+
+    <p class="footer">© <span id="year"></span> Your Name — <a href="index.html">back to index</a></p>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
