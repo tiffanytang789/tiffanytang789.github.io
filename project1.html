@@ -129,18 +129,20 @@
       <div class="grid-2">
         <div>
           <div class="box-line">L2 Norm Alignment</div>
-          <div class="box-text">Write description for A here…</div>
+          <div class="box-text">This part is where I brute-force image alignment where I used blue filter as reference filter and let other 2 filters 
+          move within in [-15,15] pixels window to check for alignment. The alignment score is calculated using Sum of Squared Differences. The alignment with greatest alignment score 
+          will be used. </div>
         </div>
         <div>
           <div class="box-line">Pyramid Image Alignment</div>
-          <div class="box-text">Write description for B here…</div>
+          <div class="box-text">For larger images (.tif image files), I implemented pyramid image alignment technique for more efficient way of aligning images. The filters are zoomed out 2 times to do first round of alignment with [-120,120] shifting window, once the alignment differences hit the threshold, filters will be zoomed back out and perform alignment from [-15,15] shifting window. </div>
         </div>
       </div>
     </section>
 
     <!-- 3 images on the same line, same size -->
     <section class="section card">
-      <h2 style="margin:0 0 10px">Images aligned with L2 norm</h2>
+      <h2 style="margin:0 0 10px">Images aligned with Brute-Force Technique through SSD Scoring</h2>
       <div class="grid-3">
         <figure>
           <a class="img-wrap ar-4x3" href="out_fcathedral.jpg" target="_blank" rel="noreferrer noopener">
@@ -162,7 +164,7 @@
 
     <!-- 8 images in a 2×4 layout (no captions) -->
     <section class="section card">
-      <h2 style="margin:0 0 10px">Large images aligned with image pyramid alignment (2×4)</h2>
+      <h2 style="margin:0 0 10px">Large images aligned with Image Pyramid Alignment with SSD Scoring</h2>
       <div class="grid-2x4">
         <figure>
           <a class="img-wrap ar-1x1" href="icon.png" target="_blank" rel="noreferrer noopener">
