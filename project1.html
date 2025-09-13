@@ -112,24 +112,24 @@
     <!-- Hero / Title (same layout) -->
     <section class="hero card">
       <span class="badge">Project 1</span>
-      <h1 class="title">Project 1 — (Replace with your title)</h1>
+      <h1 class="title">Project 1 — Images of the Russian Empire:</h1>
       <!-- <p class="subtitle">Optional one-liner here.</p> -->
     </section>
 
     <!-- Placeholder for “Part 1 …” line (you can type your own heading) -->
     <section class="section card">
-      <div class="ph ph--line" contenteditable="true">Type your section heading here (e.g., “Part 1. …”)</div>
+      <div class="ph ph--line" contenteditable="true">Techniques Used</div>
     </section>
 
     <!-- Two small title + description boxes (same size) -->
     <section class="section card">
       <div class="grid-2">
         <div>
-          <div class="ph ph--line" contenteditable="true"><h3>Small Title A</h3></div>
+          <div class="ph ph--line" contenteditable="true"><h3>L2 Norm Alignment</h3></div>
           <div class="ph ph--text" contenteditable="true">Write description for A here…</div>
         </div>
         <div>
-          <div class="ph ph--line" contenteditable="true"><h3>Small Title B</h3></div>
+          <div class="ph ph--line" contenteditable="true"><h3>Pyramid Image Alignment</h3></div>
           <div class="ph ph--text" contenteditable="true">Write description for B here…</div>
         </div>
       </div>
@@ -137,7 +137,7 @@
 
     <!-- 3 images on the same line, same size -->
     <section class="section card">
-      <h2 style="margin:0 0 10px">Three Images</h2>
+      <h2 style="margin:0 0 10px">Images aligned with L2 norm</h2>
       <div class="grid-3">
         <figure>
           <a class="img-wrap ph ph--image" href="out_fcathedral.jpg" aria-label="Replace with image">
@@ -165,8 +165,8 @@
 
     <!-- 9 images in a 3×3 layout -->
     <section class="section card">
-      <h2 style="margin:0 0 10px">Nine Images (3×3)</h2>
-      <div class="grid-3x3">
+      <h2 style="margin:0 0 10px">Large images aligned with image pyramid alignment (3×3)</h2>
+      <div class="grid-2x4">
         <!-- Repeat 9 times -->
         <figure>
           <a class="img-wrap ph ph--square" href="icon.png" aria-label="Replace with image">Square Placeholder</a>
@@ -200,22 +200,21 @@
           <a class="img-wrap ph ph--square" href="flastochikino.png" aria-label="Replace with image">Square Placeholder</a>
           <figcaption>Caption 8</figcaption>
         </figure>
-        <figure>
-          <a class="img-wrap ph ph--square" href="#" aria-label="Replace with image">Square Placeholder</a>
-          <figcaption>Caption 9</figcaption>
-        </figure>
       </div>
     </section>
 
     <!-- Title + description area -->
     <section class="section card">
-      <div class="ph ph--line" contenteditable="true"><h3>Section Title</h3></div>
-      <div class="ph ph--text" contenteditable="true">Write your description here…</div>
+      <div class="ph ph--line" contenteditable="true"><h3>Changing Base Filter</h3></div>
+      <div class="ph ph--text" contenteditable="true">I started with using blue filter as the reference filter to align the other 2 filters before stacking image. 
+      However, that didn't work out for 3 images (emir.tif, lugano.tif, and church.tif) where I noticed the red filter are significantly misaligned when the other 
+      2 filters (blue and green) align perfectly. I fixed this my using green filter as the reference filter instead because green is the more in-between filter color so 
+      they can align with other filters better since this is pixel intensity dependent alignment.</div>
     </section>
 
     <!-- 6 images in 2 columns × 3 rows -->
     <section class="section card">
-      <h2 style="margin:0 0 10px">Six Images (2×3)</h2>
+      <h2 style="margin:0 0 10px">Comparing images before and after changing reference filter (2×3)</h2>
       <div class="grid-2x3">
         <!-- Repeat 6 times -->
         <figure>
