@@ -1,10 +1,9 @@
-
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Project 1 — (Replace with your title)</title>
+  <title>Project 1 — Images of the Russian Empire</title>
   <style>
     :root{
       --bg: #f5f7fa;
@@ -13,7 +12,6 @@
       --text: #1b1f24;
       --accent: #4169e1;
       --ring: rgba(65,105,225,.3);
-      --dash: 6px;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -45,7 +43,6 @@
       margin: 28px 0 8px; font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 700;
       letter-spacing:.3px;
     }
-    .subtitle{ color:var(--muted); margin-bottom: 28px; }
 
     .card{
       background: var(--card);
@@ -58,45 +55,52 @@
     .badge{ display:inline-flex; align-items:center; gap:8px; font-size:.78rem; color:var(--muted);
       padding: 6px 10px; border:1px solid rgba(0,0,0,.1); border-radius:999px; background:rgba(255,255,255,.6) }
 
-    .desc{ color: #333742; font-size:1.02rem; }
-    .desc p{ margin: 0 0 12px }
+    /* Read-only text boxes */
+    .box-line{
+      border: 2px dashed rgba(65,105,225,.5);
+      border-radius: 14px;
+      background: rgba(65,105,225,.06);
+      color: var(--text);
+      padding: 12px 16px;
+      font-weight: 600;
+    }
+    .box-text{
+      border: 2px dashed rgba(65,105,225,.5);
+      border-radius: 14px;
+      background: rgba(65,105,225,.06);
+      color: var(--text);
+      padding: 14px;
+      min-height: 90px;
+    }
 
     /* Grids */
     .grid-2{ display:grid; gap:16px; grid-template-columns: repeat(2, minmax(0,1fr)); }
     .grid-3{ display:grid; gap:16px; grid-template-columns: repeat(3, minmax(0,1fr)); }
-    .grid-3x3{ display:grid; gap:16px; grid-template-columns: repeat(3, minmax(0,1fr)); }
     .grid-2x3{ display:grid; gap:16px; grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .grid-2x4{ display:grid; gap:16px; grid-template-columns: repeat(2, minmax(0,1fr)); }
 
     @media (max-width: 900px){
-      .grid-3,.grid-3x3{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .grid-3{ grid-template-columns: repeat(2, minmax(0,1fr)); }
     }
     @media (max-width: 600px){
-      .grid-2,.grid-3,.grid-3x3,.grid-2x3{ grid-template-columns: 1fr; }
+      .grid-2,.grid-3,.grid-2x3,.grid-2x4{ grid-template-columns: 1fr; }
     }
 
     figure{ margin:0; display:flex; flex-direction:column; gap:10px }
+
     .img-wrap{
       overflow:hidden; border-radius:14px; border:1px solid rgba(0,0,0,.08);
       display:block; background:#f0f2f7;
     }
-    img{ width:100%; height:auto; display:block; transition: transform .35s ease; }
-    .img-wrap:hover img{ transform: scale(1.03); }
-    figcaption{ color:var(--muted); font-size:.9rem }
+    /* Aspect ratio helpers for tidy tiles */
+    .img-wrap.ar-4x3{ aspect-ratio: 4 / 3; }
+    .img-wrap.ar-1x1{ aspect-ratio: 1 / 1; }
+    /* Default image fits container; when AR is set, cover keeps uniform tiles */
+    .img-wrap img{ width:100%; height:auto; display:block; transition: transform .35s ease; }
+    .img-wrap.ar-4x3 img,
+    .img-wrap.ar-1x1 img{ height:100%; object-fit: cover; }
 
-    /* Placeholders */
-    .ph{
-      border: 2px dashed rgba(65,105,225,.5);
-      border-radius: 14px;
-      background: rgba(65,105,225,.06);
-      color: var(--muted);
-      display:flex; align-items:center; justify-content:center;
-      text-align:center; padding: 14px;
-    }
-    .ph--line{ padding: 12px 16px; }
-    .ph--text{ min-height: 90px; }
-    .ph--image{ aspect-ratio: 4 / 3; }     /* consistent image tile size */
-    .ph--square{ aspect-ratio: 1 / 1; }    /* for 3x3 */
-    .ph h3{ margin:0; font-size:1rem; font-weight:600; color:#2a2f3a }
+    .img-wrap:hover img{ transform: scale(1.03); }
 
     .footer{ color:var(--muted); font-size:.9rem; margin-top:36px; text-align:center }
   </style>
@@ -109,28 +113,27 @@
   </header>
 
   <main class="container">
-    <!-- Hero / Title (same layout) -->
+    <!-- Hero / Title -->
     <section class="hero card">
       <span class="badge">Project 1</span>
-      <h1 class="title">Project 1 — Images of the Russian Empire:</h1>
-      <!-- <p class="subtitle">Optional one-liner here.</p> -->
+      <h1 class="title">Project 1 — Images of the Russian Empire</h1>
     </section>
 
-    <!-- Placeholder for “Part 1 …” line (you can type your own heading) -->
+    <!-- Read-only section heading -->
     <section class="section card">
-      <div class="ph ph--line" contenteditable="true">Techniques Used</div>
+      <div class="box-line">Techniques Used</div>
     </section>
 
-    <!-- Two small title + description boxes (same size) -->
+    <!-- Two small title + description boxes (read-only) -->
     <section class="section card">
       <div class="grid-2">
         <div>
-          <div class="ph ph--line" contenteditable="true"><h3>L2 Norm Alignment</h3></div>
-          <div class="ph ph--text" contenteditable="true">Write description for A here…</div>
+          <div class="box-line">L2 Norm Alignment</div>
+          <div class="box-text">Write description for A here…</div>
         </div>
         <div>
-          <div class="ph ph--line" contenteditable="true"><h3>Pyramid Image Alignment</h3></div>
-          <div class="ph ph--text" contenteditable="true">Write description for B here…</div>
+          <div class="box-line">Pyramid Image Alignment</div>
+          <div class="box-text">Write description for B here…</div>
         </div>
       </div>
     </section>
@@ -140,123 +143,114 @@
       <h2 style="margin:0 0 10px">Images aligned with L2 norm</h2>
       <div class="grid-3">
         <figure>
-          <a class="img-wrap ph ph--image" href="out_fcathedral.jpg" aria-label="Replace with image">
-            <img src="out_fcathedral.jpg"  />
-            <!-- <img src="your-image-1.jpg" alt="..." /> -->
-            3× Image Placeholder (4:3)
+          <a class="img-wrap ar-4x3" href="out_fcathedral.jpg" target="_blank" rel="noreferrer noopener">
+            <img src="out_fcathedral.jpg" alt="" />
           </a>
-          <figcaption>Caption #1</figcaption>
         </figure>
         <figure>
-          <a class="img-wrap ph ph--image" href="out_fmonastery.jpg" aria-label="Replace with image">
-            <img src="out_fmonastery.jpg"  />
-            <!-- <img src="your-image-2.jpg" alt="..." /> -->
-            3× Image Placeholder (4:3)
+          <a class="img-wrap ar-4x3" href="out_fmonastery.jpg" target="_blank" rel="noreferrer noopener">
+            <img src="out_fmonastery.jpg" alt="" />
           </a>
-          <figcaption>Caption #2</figcaption>
         </figure>
         <figure>
-          <a class="img-wrap ph ph--image" href="out_ftobolsk.jpg" aria-label="Replace with image">
-            <img src="out_ftobolsk.jpg"  />
-            <!-- <img src="your-image-3.jpg" alt="..." /> -->
-            3× Image Placeholder (4:3)
+          <a class="img-wrap ar-4x3" href="out_ftobolsk.jpg" target="_blank" rel="noreferrer noopener">
+            <img src="out_ftobolsk.jpg" alt="" />
           </a>
-          <figcaption>Caption #3</figcaption>
         </figure>
       </div>
     </section>
 
-    <!-- 9 images in a 3×3 layout -->
+    <!-- 8 images in a 2×4 layout (no captions) -->
     <section class="section card">
-      <h2 style="margin:0 0 10px">Large images aligned with image pyramid alignment (3×3)</h2>
+      <h2 style="margin:0 0 10px">Large images aligned with image pyramid alignment (2×4)</h2>
       <div class="grid-2x4">
-        <!-- Repeat 9 times -->
         <figure>
-          <a class="img-wrap ph ph--square" href="icon.png" aria-label="Replace with image">Square Placeholder</a>
-          <img src="icon.png"  />
-          <figcaption>Caption 1</figcaption>
+          <a class="img-wrap ar-1x1" href="icon.png" target="_blank" rel="noreferrer noopener">
+            <img src="icon.png" alt="" />
+          </a>
         </figure>
         <figure>
-          <a class="img-wrap ph ph--square" href="italil.png" aria-label="Replace with image">Square Placeholder</a>
-          <img src="italil.png"  />
-          <figcaption>Caption 2</figcaption>
+          <a class="img-wrap ar-1x1" href="italil.png" target="_blank" rel="noreferrer noopener">
+            <img src="italil.png" alt="" />
+          </a>
         </figure>
         <figure>
-          <a class="img-wrap ph ph--square" href="melon.png" aria-label="Replace with image">Square Placeholder</a>
-          <img src="melon.png"  />
-          <figcaption>Caption 3</figcaption>
+          <a class="img-wrap ar-1x1" href="melon.png" target="_blank" rel="noreferrer noopener">
+            <img src="melon.png" alt="" />
+          </a>
         </figure>
         <figure>
-          <a class="img-wrap ph ph--square" href="self_portrait.jpg" aria-label="Replace with image">Square Placeholder</a>
-          <img src="self_portrait.png"  />
-          <figcaption>Caption 4</figcaption>
+          <a class="img-wrap ar-1x1" href="self_portrait.png" target="_blank" rel="noreferrer noopener">
+            <img src="self_portrait.png" alt="" />
+          </a>
         </figure>
         <figure>
-          <a class="img-wrap ph ph--square" href="siren.png" aria-label="Replace with image">Square Placeholder</a>
-          <img src="siren.png"  />
-          <figcaption>Caption 5</figcaption>
+          <a class="img-wrap ar-1x1" href="siren.png" target="_blank" rel="noreferrer noopener">
+            <img src="siren.png" alt="" />
+          </a>
         </figure>
         <figure>
-          <a class="img-wrap ph ph--square" href="threegen.png" aria-label="Replace with image">Square Placeholder</a>
-          <img src="threegen.png"  />
-          <figcaption>Caption 6</figcaption>
+          <a class="img-wrap ar-1x1" href="threegen.png" target="_blank" rel="noreferrer noopener">
+            <img src="threegen.png" alt="" />
+          </a>
         </figure>
         <figure>
-          <a class="img-wrap ph ph--square" href="harvesters.png" aria-label="Replace with image">Square Placeholder</a>
-          <img src="harvesters.png"  />
-          <figcaption>Caption 7</figcaption>
+          <a class="img-wrap ar-1x1" href="harvesters.png" target="_blank" rel="noreferrer noopener">
+            <img src="harvesters.png" alt="" />
+          </a>
         </figure>
         <figure>
-          <a class="img-wrap ph ph--square" href="flastochikino.png" aria-label="Replace with image">Square Placeholder</a>
-          <img src="flastochikino.png"  />
-          <figcaption>Caption 8</figcaption>
+          <a class="img-wrap ar-1x1" href="flastochikino.png" target="_blank" rel="noreferrer noopener">
+            <img src="flastochikino.png" alt="" />
+          </a>
         </figure>
       </div>
     </section>
 
-    <!-- Title + description area -->
+    <!-- Read-only title + description area -->
     <section class="section card">
-      <div class="ph ph--line" contenteditable="true"><h3>Changing Base Filter</h3></div>
-      <div class="ph ph--text" contenteditable="true">I started with using blue filter as the reference filter to align the other 2 filters before stacking image. 
-      However, that didn't work out for 3 images (emir.tif, lugano.tif, and church.tif) where I noticed the red filter are significantly misaligned when the other 
-      2 filters (blue and green) align perfectly. I fixed this my using green filter as the reference filter instead because green is the more in-between filter color so 
-      they can align with other filters better since this is pixel intensity dependent alignment.</div>
+      <div class="box-line">Changing Base Filter</div>
+      <div class="box-text">
+        I started with using blue as the reference filter to align the other two filters before stacking.
+        For a few images (emir.tif, lugano.tif, church.tif), red was still misaligned even when blue and
+        green aligned well. Switching to green as the reference fixed those, likely because green sits
+        between red/blue and correlates better for pixel-intensity alignment.
+      </div>
     </section>
 
-    <!-- 6 images in 2 columns × 3 rows -->
+    <!-- 6 images in 2 columns × 3 rows (no captions) -->
     <section class="section card">
-      <h2 style="margin:0 0 10px">Comparing images before and after changing reference filter (2×3)</h2>
+      <h2 style="margin:0 0 10px">Comparing images before and after changing reference filter</h2>
       <div class="grid-2x3">
-        <!-- Repeat 6 times -->
         <figure>
-          <a class="img-wrap ph ph--image" href="emir.png" aria-label="Replace with image">Image Placeholder</a>
-          <img src="emir.png" alt="emir.tif - before changing reference filter" />
-          <figcaption>emir.tif - before changing reference filter</figcaption>
+          <a class="img-wrap ar-4x3" href="emir.png" target="_blank" rel="noreferrer noopener">
+            <img src="emir.png" alt="" />
+          </a>
         </figure>
         <figure>
-          <a class="img-wrap ph ph--image" href="emir2.png" aria-label="Replace with image">Image Placeholder</a>
-          <img src="emir2.png" alt="emir.tif - after changing reference filter" />
-          <figcaption>emir.tif - after changing reference filter</figcaption>
+          <a class="img-wrap ar-4x3" href="emir2.png" target="_blank" rel="noreferrer noopener">
+            <img src="emir2.png" alt="" />
+          </a>
         </figure>
         <figure>
-          <a class="img-wrap ph ph--image" href="lugano.png" aria-label="Replace with image">Image Placeholder</a>
-          <img src="lugano.png" alt="lugano.tif - before changing reference filter" />
-          <figcaption>lugano.tif - before changing reference filter</figcaption>
+          <a class="img-wrap ar-4x3" href="lugano.png" target="_blank" rel="noreferrer noopener">
+            <img src="lugano.png" alt="" />
+          </a>
         </figure>
         <figure>
-          <a class="img-wrap ph ph--image" href="lugano2.png" aria-label="Replace with image">Image Placeholder</a>
-          <img src="lugano2.png" alt="lugano.tif - after changing reference filter" />
-          <figcaption>lugano.tif - after changing reference filter</figcaption>
+          <a class="img-wrap ar-4x3" href="lugano2.png" target="_blank" rel="noreferrer noopener">
+            <img src="lugano2.png" alt="" />
+          </a>
         </figure>
         <figure>
-          <a class="img-wrap ph ph--image" href="church.png" aria-label="Replace with image">Image Placeholder</a>
-          <img src="church.png" alt="church.tif - before changing reference filter" />
-          <figcaption>church.tif - before changing reference filter</figcaption>
+          <a class="img-wrap ar-4x3" href="church.png" target="_blank" rel="noreferrer noopener">
+            <img src="church.png" alt="" />
+          </a>
         </figure>
         <figure>
-          <a class="img-wrap ph ph--image" href="church2.png" aria-label="Replace with image">Image Placeholder</a>
-          <img src="church2.png" alt="church.tif - after changing reference filter" />
-          <figcaption>church.tif - after changing reference filter</figcaption>
+          <a class="img-wrap ar-4x3" href="church2.png" target="_blank" rel="noreferrer noopener">
+            <img src="church2.png" alt="" />
+          </a>
         </figure>
       </div>
     </section>
