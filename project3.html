@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Project Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root { --maxw: 1100px; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0 auto; padding: 2rem 1rem; max-width: var(--maxw);
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: #111; background: #fff;
+    }
+    header h1 { margin: 0 0 1.25rem; font-size: 2rem; line-height: 1.25; }
+    h2, h3, h4 { margin: 2.25rem 0 1rem; line-height: 1.25; }
+    p { margin: 0.75rem 0 1rem; }
+    .image-row {
+      display: grid; gap: 12px; margin: 0.5rem 0 0.35rem;
+    }
+    .cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .cols-3 { grid-template-columns: repeat(3, 1fr); }
+    figure { margin: 0; }
+    img {
+      display: block; width: 100%; height: auto;
+      border-radius: 8px; border: 1px solid #e6e6e6;
+    }
+    figcaption, .row-caption {
+      font-size: 0.95rem; color: #555; margin: 0.35rem 0 1rem;
+    }
+    /* Optional: make tall images consistent height without cropping content too hard */
+    .fit-cover img { aspect-ratio: 3/2; object-fit: cover; }
+    .fit-contain img { background: #fafafa; object-fit: contain; }
+    /* Keep things readable on small screens */
+    @media (max-width: 640px) {
+      .cols-2, .cols-3 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Visible Title -->
+  <header>
+    <h1>Project Title (Replace Me)</h1>
+  </header>
+
+  <!-- Heading 1 -->
+  <h2>Heading 1</h2>
+
+  <!-- 2 images in a row, caption -->
+  <div class="image-row cols-2 fit-cover">
+    <figure><img src="https://via.placeholder.com/1200x800?text=H1+Row1+Img1" alt="Describe image 1" /></figure>
+    <figure><img src="https://via.placeholder.com/1200x800?text=H1+Row1+Img2" alt="Describe image 2" /></figure>
+  </div>
+  <div class="row-caption">Caption for the two images above (H1 Row 1).</div>
+
+  <!-- 2 images in a row, caption -->
+  <div class="image-row cols-2 fit-cover">
+    <figure><img src="https://via.placeholder.com/1200x800?text=H1+Row2+Img1" alt="Describe image 3" /></figure>
+    <figure><img src="https://via.placeholder.com/1200x800?text=H1+Row2+Img2" alt="Describe image 4" /></figure>
+  </div>
+  <div class="row-caption">Caption for the two images above (H1 Row 2).</div>
+
+  <!-- 2 images in a row, caption -->
+  <div class="image-row cols-2 fit-cover">
+    <figure><img src="https://via.placeholder.com/1200x800?text=H1+Row3+Img1" alt="Describe image 5" /></figure>
+    <figure><img src="https://via.placeholder.com/1200x800?text=H1+Row3+Img2" alt="Describe image 6" /></figure>
+  </div>
+  <div class="row-caption">Caption for the two images above (H1 Row 3).</div>
+
+  <!-- Heading 2 -->
+  <h2>Heading 2</h2>
+
+  <!-- 2 images in a row, caption -->
+  <div class="image-row cols-2 fit-cover">
+    <figure><img src="https://via.placeholder.com/1200x800?text=H2+Row1+Img1" alt="Describe image 7" /></figure>
+    <figure><img src="https://via.placeholder.com/1200x800?text=H2+Row1+Img2" alt="Describe image 8" /></figure>
+  </div>
+  <div class="row-caption">Caption (H2 Row 1).</div>
+
+  <!-- 2 images in a row, caption -->
+  <div class="image-row cols-2 fit-cover">
+    <figure><img src="https://via.placeholder.com/1200x800?text=H2+Row2+Img1" alt="Describe image 9" /></figure>
+    <figure><img src="https://via.placeholder.com/1200x800?text=H2+Row2+Img2" alt="Describe image 10" /></figure>
+  </div>
+  <div class="row-caption">Caption (H2 Row 2).</div>
+
+  <!-- 2 images in a row, caption -->
+  <div class="image-row cols-2 fit-cover">
+    <figure><img src="https://via.placeholder.com/1200x800?text=H2+Row3+Img1" alt="Describe image 11" /></figure>
+    <figure><img src="https://via.placeholder.com/1200x800?text=H2+Row3+Img2" alt="Describe image 12" /></figure>
+  </div>
+  <div class="row-caption">Caption (H2 Row 3).</div>
+
+  <p>
+    Paragraph for Heading 2 section. Replace with your text describing the sets above.
+  </p>
+
+  <!-- Heading 3 -->
+  <h3>Heading 3</h3>
+
+  <!-- 3 images in a row, caption -->
+  <div class="image-row cols-3 fit-cover">
+    <figure><img src="https://via.placeholder.com/1200x800?text=H3+Row1+Img1" alt="Describe image 13" /></figure>
+    <figure><img src="https://via.placeholder.com/1200x800?text=H3+Row1+Img2" alt="Describe image 14" /></figure>
+    <figure><img src="https://via.placeholder.com/1200x800?text=H3+Row1+Img3" alt="Describe image 15" /></figure>
+  </div>
+  <div class="row-caption">Caption (H3 Row 1).</div>
+
+  <!-- 3 images in a row, caption -->
+  <div class="image-row cols-3 fit-cover">
+    <figure><img src="https://via.placeholder.com/1200x800?text=H3+Row2+Img1" alt="Describe image 16" /></figure>
+    <figure><img src="https://via.placeholder.com/1200x800?text=H3+Row2+Img2" alt="Describe image 17" /></figure>
+    <figure><img src="https://via.placeholder.com/1200x800?text=H3+Row2+Img3" alt="Describe image 18" /></figure>
+  </div>
+  <div class="row-caption">Caption (H3 Row 2).</div>
+
+  <!-- 3 images in a row, caption -->
+  <div class="image-row cols-3 fit-cover">
+    <figure><img src="https://via.placeholder.com/1200x800?text=H3+Row3+Img1" alt="Describe image 19" /></figure>
+    <figure><img src="https://via.placeholder.com/1200x800?text=H3+Row3+Img2" alt="Describe image 20" /></figure>
+    <figure><img src="https://via.placeholder.com/1200x800?text=H3+Row3+Img3" alt="Describe image 21" /></figure>
+  </div>
+  <div class="row-caption">Caption (H3 Row 3).</div>
+
+  <p>
+    Paragraph for Heading 3 section. Replace with your narrative.
+  </p>
+
+  <!-- Heading 4 -->
+  <h4>Heading 4</h4>
+
+  <!-- Group 1: 2 images in a row, caption; then 1 image, caption -->
+  <div class="image-row cols-2 fit-cover">
+    <figure><img src="https://via.placeholder.com/1200x800?text=H4+G1+Row1+Img1" alt="Describe image 22" /></figure>
+    <figure><img src="https://via.placeholder.com/1200x800?text=H4+G1+Row1+Img2" alt="Describe image 23" /></figure>
+  </div>
+  <div class="row-caption">Caption (H4 Group 1 — two images).</div>
+
+  <figure>
+    <img src="https://via.placeholder.com/1600x1000?text=H4+G1+Single" alt="Describe image 24" />
+    <figcaption>Caption (H4 Group 1 — single image).</figcaption>
+  </figure>
+
+  <!-- Group 2: 2 images in a row, caption; then 1 image, caption -->
+  <div class="image-row cols-2 fit-cover">
+    <figure><img src="https://via.placeholder.com/1200x800?text=H4+G2+Row1+Img1" alt="Describe image 25" /></figure>
+    <figure><img src="https://via.placeholder.com/1200x800?text=H4+G2+Row1+Img2" alt="Describe image 26" /></figure>
+  </div>
+  <div class="row-caption">Caption (H4 Group 2 — two images).</div>
+
+  <figure>
+    <img src="https://via.placeholder.com/1600x1000?text=H4+G2+Single" alt="Describe image 27" />
+    <figcaption>Caption (H4 Group 2 — single image).</figcaption>
+  </figure>
+
+  <!-- Group 3: 2 images in a row, caption; then 1 image, caption -->
+  <div class="image-row cols-2 fit-cover">
+    <figure><img src="https://via.placeholder.com/1200x800?text=H4+G3+Row1+Img1" alt="Describe image 28" /></figure>
+    <figure><img src="https://via.placeholder.com/1200x800?text=H4+G3+Row1+Img2" alt="Describe image 29" /></figure>
+  </div>
+  <div class="row-caption">Caption (H4 Group 3 — two images).</div>
+
+  <figure>
+    <img src="https://via.placeholder.com/1600x1000?text=H4+G3+Single" alt="Describe image 30" />
+    <figcaption>Caption (H4 Group 3 — single image).</figcaption>
+  </figure>
+
+  <p>
+    Paragraph for Heading 4 section. Final notes, context, credits, etc.
+  </p>
+
+</body>
+</html>
