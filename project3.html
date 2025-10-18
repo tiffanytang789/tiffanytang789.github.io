@@ -87,17 +87,19 @@
 
   <p>
     <ol>
-      <li>Solve the linear least squares problem A h ≈ b using a robust solver (e.g., QR or SVD).</li>
-      <li>Form the 3×3 matrix:
+      <li>Collect at least four pairs of matching points (x, y) ↔ (x′, y′) between the two images.</li>
+      <li>For each pair, create two rows in matrix A that represent the homography constraints.  
+        The unknowns are the eight parameters of H (h<sub>11</sub> … h<sub>32</sub>, with h<sub>33</sub> = 1).
+      </li>
+      <li>Stack all correspondences to form the full linear system A h ≈ b.</li>
+      <li>Solve for h using least squares or SVD.  
+        Reshape the result into the 3×3 homography matrix:
         <br><br>
         H = [[h<sub>11</sub>, h<sub>12</sub>, h<sub>13</sub>],
         [h<sub>21</sub>, h<sub>22</sub>, h<sub>23</sub>],
         [h<sub>31</sub>, h<sub>32</sub>, 1]]
       </li>
-      <li>Scale H so that ‖H‖ has a convenient magnitude (e.g., set H<sub>33</sub> = 1).</li>
-      <li>Optionally use the homogeneous 9-parameter DLT with SVD by stacking rows
-        [−x, −y, −1, 0, 0, 0, x x′, y x′, x′] and
-        [0, 0, 0, −x, −y, −1, x y′, y y′, y′], then take the right singular vector with the smallest singular value and reshape to H.</li>
+      <li>Normalize H so that the scale is consistent (commonly set h<sub>33</sub> = 1).</li>
     </ol>
   </p>
 
@@ -132,17 +134,21 @@ Warp (Bilinear) took 6.625 s  (6625.3 ms).</div>
 Warp (Bilinear) took 0.699 s  (698.5 ms)</div>
 
   <p>
-    <ol>
-      <li>Compute output canvas bounds by projecting the four corners of the source image through H and taking min/max of the projected coordinates together with the reference image corners.</li>
-      <li>Use inverse mapping for each output pixel (u, v): compute [x, y, w]<sup>T</sup> = H<sup>−1</sup>[u, v, 1]<sup>T</sup>, then x̃ = x/w, ỹ = y/w.</li>
-      <li>Sample the source image at (x̃, ỹ) using bilinear interpolation for smoother results (nearest neighbor is acceptable for speed).</li>
-      <li>Composite the warped image onto the reference:
+     <ol>
+      <li>Project the corners of the source image through H to estimate the overall canvas bounds.</li>
+      <li>For each output pixel (u, v), compute the corresponding source coordinate using inverse mapping:
+        <br><br>
+        [x, y, w]<sup>T</sup> = H<sup>−1</sup>[u, v, 1]<sup>T</sup>, then x̃ = x/w, ỹ = y/w.
+      </li>
+      <li>Sample the source pixel at (x̃, ỹ) using bilinear interpolation for smoother results  
+        (nearest neighbor can be used for speed).</li>
+      <li>Overlay the warped image onto the reference:
         <ul>
-          <li>Simple overwrite in non-overlap regions.</li>
-          <li>In overlap, use feathering with weights that decay from each image’s boundary, or use a linear alpha ramp.</li>
+          <li>Use simple overwrite where there’s no overlap.</li>
+          <li>In overlapping regions, apply feathering or alpha blending to smooth seams.</li>
         </ul>
       </li>
-      <li>Return the stitched mosaic and the warp grid if needed for debugging.</li>
+      <li>The result is the stitched mosaic image</li>
     </ol>
     NN is faster but Bilinear produces better quality 
   </p>
@@ -187,15 +193,15 @@ Warp (Bilinear) took 0.699 s  (698.5 ms)</div>
   </figure>
 
   <p>
-    <ol>
-      <li>Plot correspondences by drawing the two images side by side, offsetting the second image’s x-coordinates, and connecting matched points with line segments.</li>
-      <li>Overlay the point locations on their respective images by drawing small circles at (x, y) and (x′, y′) with index labels.</li>
-      <li>Visualize the warp by projecting a regular grid from the source image through H and drawing the transformed grid on the mosaic.</li>
-      <li>Measure runtime for a function call such as imwarp = warpImageNearestNeighbor(im, H) using a high-resolution timer:
+      <ol>
+      <li>Visualize correspondences by plotting both images side by side and connecting matched points with lines.</li>
+      <li>Draw detected feature locations as small circles on each image to check accuracy.</li>
+      <li>Project a regular grid through H and display it on the mosaic to visualize distortion.</li>
+      <li>Measure runtime for the warp function using timestamps:
         <br><br>
-        t<sub>0</sub> = now, run the function, t<sub>1</sub> = now, Δt = t<sub>1</sub> − t<sub>0</sub>.
+        t₀ = start time, t₁ = end time, Δt = t₁ − t₀
       </li>
-      <li>Report pixel count, interpolation mode, and elapsed time to compare performance across settings.</li>
+      <li>Record the runtime, number of pixels processed, and interpolation method to compare performance.</li>
     </ol>
   </p>
 
@@ -256,16 +262,16 @@ Warp (Bilinear) took 0.699 s  (698.5 ms)</div>
   </figure>
   <p>
     <ol>
-      <li>For each retained corner x<sub>i</sub>, extract a square grayscale patch centered at x<sub>i</sub> (e.g., 40×40 pixels) using interpolation to handle subpixel locations.</li>
-      <li>Downsample or blur the patch to reduce noise and small misalignments (e.g., blur then resize to 8×8 or 16×16).</li>
-      <li>Vectorize the patch to get p<sub>i</sub>. Normalize to achieve invariance to contrast:
+      <li>For each corner x<sub>i</sub>, take a small grayscale patch centered at that point (around 40×40 px) and use interpolation if needed to handle subpixel locations.</li>
+      <li>Apply a light blur or resize the patch down (for example, to 8×8 or 16×16) so small alignment differences don’t matter as much.</li>
+      <li>Flatten the patch into a vector p<sub>i</sub> and normalize it:
         <br><br>
         p̄<sub>i</sub> = (p<sub>i</sub> − μ<sub>i</sub>) / (σ<sub>i</sub> + ε)
         <br><br>
-        where μ<sub>i</sub> is the mean intensity of the patch, σ<sub>i</sub> its standard deviation, and ε is a small constant.
+        where μ<sub>i</sub> is the patch mean, σ<sub>i</sub> its standard deviation, and ε is a small constant for stability.
       </li>
-      <li>Optionally clamp the values to a fixed range to reduce outliers (e.g., clip to [−3, 3]), then renormalize to unit length. The resulting descriptor is d<sub>i</sub>.</li>
-      <li>Store (x<sub>i</sub>, d<sub>i</sub>) for matching.</li>
+      <li>Clamp the vector to a fixed range (like [−3, 3]) and re-normalize to unit length. This gives the final descriptor d<sub>i</sub>.</li>
+      <li>Store each (x<sub>i</sub>, d<sub>i</sub>) pair to use later for matching.</li>
     </ol>
 
   </p>
@@ -278,19 +284,13 @@ Warp (Bilinear) took 0.699 s  (698.5 ms)</div>
   </figure>
   <p>
     <ol>
-      <li>Given descriptors d<sub>i</sub> from image A and d′<sub>j</sub> from image B, compute pairwise distances using SSD:
+      <li>Take all descriptors from image A and B. Compute the squared distance (SSD) between every pair:
         <br><br>
-        SSD(i, j) = ‖d<sub>i</sub> − d′<sub>j</sub>‖<sup>2</sup>
+        SSD(i, j) = ‖d<sub>i</sub> − d′<sub>j</sub>‖²
       </li>
-      <li>For each d<sub>i</sub>, find its two nearest neighbors in B with distances s<sub>1</sub> ≤ s<sub>2</sub>.</li>
-      <li>Apply the ratio test to reject ambiguous matches:
-        <br><br>
-        s<sub>1</sub> / s<sub>2</sub> &lt; τ
-        <br><br>
-        where τ is typically 0.7–0.8. Pairs failing the test are discarded.
-      </li>
-      <li>Optionally enforce mutual consistency: keep (i, j) only if i is the best match for j and j is the best for i.</li>
-      <li>The surviving pairs (x<sub>i</sub> ↔ x′<sub>j</sub>) are candidate correspondences.</li>
+      <li>For each d<sub>i</sub>, find its two nearest neighbors in B. Let their distances be s<sub>1</sub> and s<sub>2</sub>.</li>
+      <li>Use the ratio test s<sub>1</sub>/s<sub>2</sub> &lt; τ (typically 0.7 – 0.8) to remove ambiguous matches.</li>
+      <li>The remaining pairs (x<sub>i</sub> ↔ x′<sub>j</sub>) are your reliable matches.</li>
     </ol>
   </p>
 
@@ -329,16 +329,16 @@ Warp (Bilinear) took 0.699 s  (698.5 ms)</div>
 
   <p>
     <ol>
-      <li>Input the candidate correspondences (x<sub>i</sub> ↔ x′<sub>j</sub>). Define an inlier threshold ε in pixels for reprojection error.</li>
-      <li>Repeat for N iterations:
+      <li>Start with all candidate matches (x<sub>i</sub> ↔ x′<sub>j</sub>) and pick an inlier threshold ε for reprojection error (in pixels).</li>
+      <li>Run RANSAC for N iterations:
         <ul>
-          <li>Randomly sample 4 correspondences and estimate a homography H using the DLT formulation.</li>
-          <li>Project points from A to B: x̂′ = H x (homogeneous coordinates), then normalize.</li>
-          <li>Compute reprojection error e = ‖x̂′ − x′‖. Mark a correspondence as an inlier if e &lt; ε.</li>
+          <li>Randomly choose 4 matches and estimate H with DLT.</li>
+          <li>Warp points from A → B using H and normalize.</li>
+          <li>Compute reprojection error e = ‖x̂′ − x′‖ and mark inliers if e &lt; ε.</li>
         </ul>
       </li>
-      <li>Keep the hypothesis H with the largest inlier set. Refit H using all inliers via least squares for the final estimate.</li>
-      <li>Return H and the inlier correspondences for downstream warping and blending.</li>
+      <li>Keep the H with the most inliers, then recompute H using all of them for a refined fit.</li>
+      <li>Return the final H and inlier set — these define the robust alignment used for the automatic mosaics.</li>
     </ol>
   </p>
 
