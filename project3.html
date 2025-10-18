@@ -67,6 +67,8 @@
     <figure><img src="IMG_8310.jpg" alt="Describe image 6" /></figure>
   </div>
   <div class="row-caption">images of living room.</div>
+ 
+    
 
   <!-- Heading 2 -->
   <h2>A.2</h2>
@@ -84,7 +86,19 @@
   <div class="row-caption">Caption (H2 Row 3).</div>
 
   <p>
-    Paragraph for Heading 2 section. Replace with your text describing the sets above.
+    <ol>
+      <li>Solve the linear least squares problem A h ≈ b using a robust solver (e.g., QR or SVD).</li>
+      <li>Form the 3×3 matrix:
+        <br><br>
+        H = [[h<sub>11</sub>, h<sub>12</sub>, h<sub>13</sub>],
+        [h<sub>21</sub>, h<sub>22</sub>, h<sub>23</sub>],
+        [h<sub>31</sub>, h<sub>32</sub>, 1]]
+      </li>
+      <li>Scale H so that ‖H‖ has a convenient magnitude (e.g., set H<sub>33</sub> = 1).</li>
+      <li>Optionally use the homogeneous 9-parameter DLT with SVD by stacking rows
+        [−x, −y, −1, 0, 0, 0, x x′, y x′, x′] and
+        [0, 0, 0, −x, −y, −1, x y′, y y′, y′], then take the right singular vector with the smallest singular value and reshape to H.</li>
+    </ol>
   </p>
 
   <!-- Heading 3 -->
@@ -118,6 +132,18 @@ Warp (Bilinear) took 6.625 s  (6625.3 ms).</div>
 Warp (Bilinear) took 0.699 s  (698.5 ms)</div>
 
   <p>
+    <ol>
+      <li>Compute output canvas bounds by projecting the four corners of the source image through H and taking min/max of the projected coordinates together with the reference image corners.</li>
+      <li>Use inverse mapping for each output pixel (u, v): compute [x, y, w]<sup>T</sup> = H<sup>−1</sup>[u, v, 1]<sup>T</sup>, then x̃ = x/w, ỹ = y/w.</li>
+      <li>Sample the source image at (x̃, ỹ) using bilinear interpolation for smoother results (nearest neighbor is acceptable for speed).</li>
+      <li>Composite the warped image onto the reference:
+        <ul>
+          <li>Simple overwrite in non-overlap regions.</li>
+          <li>In overlap, use feathering with weights that decay from each image’s boundary, or use a linear alpha ramp.</li>
+        </ul>
+      </li>
+      <li>Return the stitched mosaic and the warp grid if needed for debugging.</li>
+    </ol>
     NN is faster but Bilinear produces better quality 
   </p>
 
@@ -161,7 +187,16 @@ Warp (Bilinear) took 0.699 s  (698.5 ms)</div>
   </figure>
 
   <p>
-    Paragraph for Heading 4 section. Final notes, context, credits, etc.
+    <ol>
+      <li>Plot correspondences by drawing the two images side by side, offsetting the second image’s x-coordinates, and connecting matched points with line segments.</li>
+      <li>Overlay the point locations on their respective images by drawing small circles at (x, y) and (x′, y′) with index labels.</li>
+      <li>Visualize the warp by projecting a regular grid from the source image through H and drawing the transformed grid on the mosaic.</li>
+      <li>Measure runtime for a function call such as imwarp = warpImageNearestNeighbor(im, H) using a high-resolution timer:
+        <br><br>
+        t<sub>0</sub> = now, run the function, t<sub>1</sub> = now, Δt = t<sub>1</sub> − t<sub>0</sub>.
+      </li>
+      <li>Report pixel count, interpolation mode, and elapsed time to compare performance across settings.</li>
+    </ol>
   </p>
 
     <!-- ===================== -->
@@ -185,18 +220,18 @@ Warp (Bilinear) took 0.699 s  (698.5 ms)</div>
     </figure>
   </div>
   <p>
-    <ol>
+     <ol>
       <li>
-        <strong>Compute corner strength</strong> f(x<sub>i</sub>) (e.g., Harris response) for each interest point.
+        Compute corner strength f(x<sub>i</sub>) (e.g., Harris response) for each interest point.
       </li>
       <li>
-        For every point x<sub>i</sub>, find its <strong>suppression radius</strong> r<sub>i</sub>:
+        For every point x<sub>i</sub>, find its suppression radius r<sub>i</sub>:
         <br><br>
         r<sub>i</sub> = min<sub>j</sub> ||x<sub>i</sub> − x<sub>j</sub>|| 
         &nbsp;&nbsp; s.t.&nbsp; f(x<sub>i</sub>) &lt; c<sub>robust</sub> · f(x<sub>j</sub>)
         <ul>
           <li>
-            Here, x<sub>j</sub> are <em>stronger</em> neighbors, and c<sub>robust</sub> ≈ 0.9 ensures the neighbor must be significantly stronger.
+            Here, x<sub>j</sub> are stronger neighbors, and c<sub>robust</sub> ≈ 0.9 ensures the neighbor must be significantly stronger.
           </li>
         </ul>
       </li>
@@ -208,7 +243,7 @@ Warp (Bilinear) took 0.699 s  (698.5 ms)</div>
         </ul>
       </li>
       <li>
-        <strong>Select the top N points with the largest radii</strong> — these are spatially diverse yet strong corners.
+        Select the top N points with the largest radii — these are spatially diverse yet strong corners.
       </li>
     </ol>
   </p>
@@ -220,7 +255,19 @@ Warp (Bilinear) took 0.699 s  (698.5 ms)</div>
     <figcaption>20 descriptors</figcaption>
   </figure>
   <p>
-    Paragraph for Part B.2. Explain the context and result here.
+    <ol>
+      <li>For each retained corner x<sub>i</sub>, extract a square grayscale patch centered at x<sub>i</sub> (e.g., 40×40 pixels) using interpolation to handle subpixel locations.</li>
+      <li>Downsample or blur the patch to reduce noise and small misalignments (e.g., blur then resize to 8×8 or 16×16).</li>
+      <li>Vectorize the patch to get p<sub>i</sub>. Normalize to achieve invariance to contrast:
+        <br><br>
+        p̄<sub>i</sub> = (p<sub>i</sub> − μ<sub>i</sub>) / (σ<sub>i</sub> + ε)
+        <br><br>
+        where μ<sub>i</sub> is the mean intensity of the patch, σ<sub>i</sub> its standard deviation, and ε is a small constant.
+      </li>
+      <li>Optionally clamp the values to a fixed range to reduce outliers (e.g., clip to [−3, 3]), then renormalize to unit length. The resulting descriptor is d<sub>i</sub>.</li>
+      <li>Store (x<sub>i</sub>, d<sub>i</sub>) for matching.</li>
+    </ol>
+
   </p>
 
   <h2>Part B.3</h2>
@@ -230,7 +277,21 @@ Warp (Bilinear) took 0.699 s  (698.5 ms)</div>
     <figcaption>matched features</figcaption>
   </figure>
   <p>
-    Paragraph for Part B.3. Notes, settings, and analysis.
+    <ol>
+      <li>Given descriptors d<sub>i</sub> from image A and d′<sub>j</sub> from image B, compute pairwise distances using SSD:
+        <br><br>
+        SSD(i, j) = ‖d<sub>i</sub> − d′<sub>j</sub>‖<sup>2</sup>
+      </li>
+      <li>For each d<sub>i</sub>, find its two nearest neighbors in B with distances s<sub>1</sub> ≤ s<sub>2</sub>.</li>
+      <li>Apply the ratio test to reject ambiguous matches:
+        <br><br>
+        s<sub>1</sub> / s<sub>2</sub> &lt; τ
+        <br><br>
+        where τ is typically 0.7–0.8. Pairs failing the test are discarded.
+      </li>
+      <li>Optionally enforce mutual consistency: keep (i, j) only if i is the best match for j and j is the best for i.</li>
+      <li>The surviving pairs (x<sub>i</sub> ↔ x′<sub>j</sub>) are candidate correspondences.</li>
+    </ol>
   </p>
 
   <h2>Part B.4</h2>
@@ -267,7 +328,18 @@ Warp (Bilinear) took 0.699 s  (698.5 ms)</div>
   </div>
 
   <p>
-    Paragraph for Part B.4. Summarize comparisons across the grids above and key insights.
+    <ol>
+      <li>Input the candidate correspondences (x<sub>i</sub> ↔ x′<sub>j</sub>). Define an inlier threshold ε in pixels for reprojection error.</li>
+      <li>Repeat for N iterations:
+        <ul>
+          <li>Randomly sample 4 correspondences and estimate a homography H using the DLT formulation.</li>
+          <li>Project points from A to B: x̂′ = H x (homogeneous coordinates), then normalize.</li>
+          <li>Compute reprojection error e = ‖x̂′ − x′‖. Mark a correspondence as an inlier if e &lt; ε.</li>
+        </ul>
+      </li>
+      <li>Keep the hypothesis H with the largest inlier set. Refit H using all inliers via least squares for the final estimate.</li>
+      <li>Return H and the inlier correspondences for downstream warping and blending.</li>
+    </ol>
   </p>
 
 
