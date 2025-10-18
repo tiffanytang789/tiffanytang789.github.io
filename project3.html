@@ -172,20 +172,45 @@ Warp (Bilinear) took 0.699 s  (698.5 ms)</div>
   <!-- 3 images in a row, each with its own caption, then a paragraph -->
   <div class="image-row cols-3 fit-cover">
     <figure>
-      <img src="b1_img1.jpg" alt="B1 image 1">
-      <figcaption>Caption for B1 image 1.</figcaption>
+      <img src="IMG_6311.jpg" alt="B1 image 1">
+      <figcaption>Original image</figcaption>
     </figure>
     <figure>
-      <img src="b1_img2.jpg" alt="B1 image 2">
-      <figcaption>Caption for B1 image 2.</figcaption>
+      <img src="6311_all.png" alt="B1 image 2">
+      <figcaption>without ANMS</figcaption>
     </figure>
     <figure>
-      <img src="b1_img3.jpg" alt="B1 image 3">
-      <figcaption>Caption for B1 image 3.</figcaption>
+      <img src="6311_anms.png" alt="B1 image 3">
+      <figcaption>with ANMS</figcaption>
     </figure>
   </div>
   <p>
-    Paragraph for Part B.1. Describe the set above, observations, and takeaways.
+    <ol>
+      <li>
+        <strong>Compute corner strength</strong> f(x<sub>i</sub>) (e.g., Harris response) for each interest point.
+      </li>
+      <li>
+        For every point x<sub>i</sub>, find its <strong>suppression radius</strong> r<sub>i</sub>:
+        <br><br>
+        r<sub>i</sub> = min<sub>j</sub> ||x<sub>i</sub> − x<sub>j</sub>|| 
+        &nbsp;&nbsp; s.t.&nbsp; f(x<sub>i</sub>) &lt; c<sub>robust</sub> · f(x<sub>j</sub>)
+        <ul>
+          <li>
+            Here, x<sub>j</sub> are <em>stronger</em> neighbors, and c<sub>robust</sub> ≈ 0.9 ensures the neighbor must be significantly stronger.
+          </li>
+        </ul>
+      </li>
+      <li>
+        The radius r<sub>i</sub> measures how far you must go from x<sub>i</sub> to find a clearly stronger corner.
+        <ul>
+          <li>Strong isolated points → large r<sub>i</sub></li>
+          <li>Weak clustered points → small r<sub>i</sub></li>
+        </ul>
+      </li>
+      <li>
+        <strong>Select the top N points with the largest radii</strong> — these are spatially diverse yet strong corners.
+      </li>
+    </ol>
   </p>
 
   <h2>Part B.2</h2>
