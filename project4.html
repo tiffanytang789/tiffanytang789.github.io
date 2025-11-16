@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project 4</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        h1, h2 {
+            text-align: left;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        .figure-single,
+        .image-row,
+        .image-grid-2x2 {
+            margin: 16px 0;
+        }
+
+        figure {
+            margin: 0;
+            text-align: center;
+        }
+
+        figure img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        figcaption {
+            margin-top: 6px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        /* Generic horizontal image row (each image has its own caption) */
+        .image-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .image-row figure {
+            flex: 1 1 18%; /* Good for 5–6 images per row on large screens */
+            min-width: 120px;
+        }
+
+        /* 2x2 image grid */
+        .image-grid-2x2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            justify-items: center;
+        }
+
+        .image-grid-2x2 figure {
+            width: 100%;
+        }
+
+        /* Row where a single caption is shared by all images */
+        .image-row-shared-caption {
+            margin: 16px 0;
+        }
+
+        .image-row-shared-caption .images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .image-row-shared-caption .images img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .image-row-shared-caption figcaption {
+            margin-top: 8px;
+        }
+
+        /* Simple styling for GIFs (optional, same as regular images) */
+        .gif {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Project 4</h1>
+
+    <!-- ================= Part 0 ================= -->
+    <section id="part0">
+        <h2>Part 0</h2>
+
+        <!-- Two images side by side, each with its own caption -->
+        <div class="image-row">
+            <figure>
+                <!-- TODO: replace src with your file name -->
+                <img src="part0_image1.png" alt="Part 0 image 1">
+                <figcaption>Caption for Part 0 Image 1</figcaption>
+            </figure>
+
+            <figure>
+                <!-- TODO: replace src with your file name -->
+                <img src="part0_image2.png" alt="Part 0 image 2">
+                <figcaption>Caption for Part 0 Image 2</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <!-- ================= Part 1 ================= -->
+    <section id="part1">
+        <h2>Part 1</h2>
+
+        <!-- Paragraph -->
+        <p>
+            <!-- TODO: Replace this text with your Part 1 description -->
+            This is a short description of the results and methods for Part 1.
+        </p>
+
+        <!-- Single image with caption -->
+        <figure class="figure-single">
+            <img src="part1_image1.png" alt="Part 1 image 1">
+            <figcaption>Caption for Part 1 Image 1</figcaption>
+        </figure>
+
+        <!-- Row of 5 images with individual captions -->
+        <div class="image-row">
+            <figure>
+                <img src="part1_row1_img1.png" alt="Part 1 row 1 image 1">
+                <figcaption>Caption 1</figcaption>
+            </figure>
+            <figure>
+                <img src="part1_row1_img2.png" alt="Part 1 row 1 image 2">
+                <figcaption>Caption 2</figcaption>
+            </figure>
+            <figure>
+                <img src="part1_row1_img3.png" alt="Part 1 row 1 image 3">
+                <figcaption>Caption 3</figcaption>
+            </figure>
+            <figure>
+                <img src="part1_row1_img4.png" alt="Part 1 row 1 image 4">
+                <figcaption>Caption 4</figcaption>
+            </figure>
+            <figure>
+                <img src="part1_row1_img5.png" alt="Part 1 row 1 image 5">
+                <figcaption>Caption 5</figcaption>
+            </figure>
+        </div>
+
+        <!-- Single image with caption -->
+        <figure class="figure-single">
+            <img src="part1_image2.png" alt="Part 1 image 2">
+            <figcaption>Caption for Part 1 Image 2</figcaption>
+        </figure>
+
+        <!-- 4 images in 2x2 layout with captions -->
+        <div class="image-grid-2x2">
+            <figure>
+                <img src="part1_grid1_img1.png" alt="Part 1 grid 1 image 1">
+                <figcaption>Caption A</figcaption>
+            </figure>
+            <figure>
+                <img src="part1_grid1_img2.png" alt="Part 1 grid 1 image 2">
+                <figcaption>Caption B</figcaption>
+            </figure>
+            <figure>
+                <img src="part1_grid1_img3.png" alt="Part 1 grid 1 image 3">
+                <figcaption>Caption C</figcaption>
+            </figure>
+            <figure>
+                <img src="part1_grid1_img4.png" alt="Part 1 grid 1 image 4">
+                <figcaption>Caption D</figcaption>
+            </figure>
+        </div>
+
+        <!-- Single image with caption -->
+        <figure class="figure-single">
+            <img src="part1_image3.png" alt="Part 1 image 3">
+            <figcaption>Caption for Part 1 Image 3</figcaption>
+        </figure>
+
+        <!-- Second row of 5 images with captions -->
+        <div class="image-row">
+            <figure>
+                <img src="part1_row2_img1.png" alt="Part 1 row 2 image 1">
+                <figcaption>Caption 1</figcaption>
+            </figure>
+            <figure>
+                <img src="part1_row2_img2.png" alt="Part 1 row 2 image 2">
+                <figcaption>Caption 2</figcaption>
+            </figure>
+            <figure>
+                <img src="part1_row2_img3.png" alt="Part 1 row 2 image 3">
+                <figcaption>Caption 3</figcaption>
+            </figure>
+            <figure>
+                <img src="part1_row2_img4.png" alt="Part 1 row 2 image 4">
+                <figcaption>Caption 4</figcaption>
+            </figure>
+            <figure>
+                <img src="part1_row2_img5.png" alt="Part 1 row 2 image 5">
+                <figcaption>Caption 5</figcaption>
+            </figure>
+        </div>
+
+        <!-- Second 2x2 grid with captions -->
+        <div class="image-grid-2x2">
+            <figure>
+                <img src="part1_grid2_img1.png" alt="Part 1 grid 2 image 1">
+                <figcaption>Caption A</figcaption>
+            </figure>
+            <figure>
+                <img src="part1_grid2_img2.png" alt="Part 1 grid 2 image 2">
+                <figcaption>Caption B</figcaption>
+            </figure>
+            <figure>
+                <img src="part1_grid2_img3.png" alt="Part 1 grid 2 image 3">
+                <figcaption>Caption C</figcaption>
+            </figure>
+            <figure>
+                <img src="part1_grid2_img4.png" alt="Part 1 grid 2 image 4">
+                <figcaption>Caption D</figcaption>
+            </figure>
+        </div>
+
+        <!-- Final image with caption -->
+        <figure class="figure-single">
+            <img src="part1_image4.png" alt="Part 1 image 4">
+            <figcaption>Caption for Part 1 Image 4</figcaption>
+        </figure>
+    </section>
+
+    <!-- ================= Part 2 ================= -->
+    <section id="part2">
+        <h2>Part 2</h2>
+
+        <!-- Paragraph -->
+        <p>
+            <!-- TODO: Replace with your Part 2 explanation -->
+            This is a description of Part 2 results and observations.
+        </p>
+
+        <!-- Row of 2 images with individual captions -->
+        <div class="image-row">
+            <figure>
+                <img src="part2_row1_img1.png" alt="Part 2 row 1 image 1">
+                <figcaption>Caption for Image 1</figcaption>
+            </figure>
+            <figure>
+                <img src="part2_row1_img2.png" alt="Part 2 row 1 image 2">
+                <figcaption>Caption for Image 2</figcaption>
+            </figure>
+        </div>
+
+        <!-- Row of 6 images sharing one caption -->
+        <figure class="image-row-shared-caption">
+            <div class="images">
+                <img src="part2_row2_img1.png" alt="Part 2 row 2 image 1">
+                <img src="part2_row2_img2.png" alt="Part 2 row 2 image 2">
+                <img src="part2_row2_img3.png" alt="Part 2 row 2 image 3">
+                <img src="part2_row2_img4.png" alt="Part 2 row 2 image 4">
+                <img src="part2_row2_img5.png" alt="Part 2 row 2 image 5">
+                <img src="part2_row2_img6.png" alt="Part 2 row 2 image 6">
+            </div>
+            <figcaption>Shared caption for all 6 images in this row.</figcaption>
+        </figure>
+
+        <!-- Single image with caption -->
+        <figure class="figure-single">
+            <img src="part2_image1.png" alt="Part 2 image 1">
+            <figcaption>Caption for Part 2 Image 1</figcaption>
+        </figure>
+
+        <!-- GIF -->
+        <figure class="figure-single">
+            <img class="gif" src="part2_animation.gif" alt="Part 2 GIF">
+            <figcaption>Caption for Part 2 GIF</figcaption>
+        </figure>
+    </section>
+
+    <!-- ================= Part 2.6 ================= -->
+    <section id="part2-6">
+        <h2>Part 2.6</h2>
+
+        <!-- GIF -->
+        <figure class="figure-single">
+            <img class="gif" src="part2_6_animation.gif" alt="Part 2.6 GIF">
+            <figcaption>Caption for Part 2.6 GIF</figcaption>
+        </figure>
+
+        <!-- Paragraph -->
+        <p>
+            <!-- TODO: Replace with your Part 2.6 explanation -->
+            This paragraph explains the results and observations for Part 2.6.
+        </p>
+
+        <!-- Single image with caption -->
+        <figure class="figure-single">
+            <img src="part2_6_image1.png" alt="Part 2.6 image 1">
+            <figcaption>Caption for Part 2.6 Image 1</figcaption>
+        </figure>
+
+        <!-- Row of 6 images sharing one caption -->
+        <figure class="image-row-shared-caption">
+            <div class="images">
+                <img src="part2_6_row_img1.png" alt="Part 2.6 row image 1">
+                <img src="part2_6_row_img2.png" alt="Part 2.6 row image 2">
+                <img src="part2_6_row_img3.png" alt="Part 2.6 row image 3">
+                <img src="part2_6_row_img4.png" alt="Part 2.6 row image 4">
+                <img src="part2_6_row_img5.png" alt="Part 2.6 row image 5">
+                <img src="part2_6_row_img6.png" alt="Part 2.6 row image 6">
+            </div>
+            <figcaption>Shared caption for all 6 images in this row.</figcaption>
+        </figure>
+    </section>
+</body>
+</html>
