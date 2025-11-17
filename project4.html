@@ -259,11 +259,24 @@ Training on mps for 2000 iters, batch size 10000
         <h2>Part 2</h2>
 
         <!-- Paragraph -->
-        <p>
-            <!-- TODO: Replace with your Part 2 explanation -->
-            This is a description of Part 2 results and observations.
-        </p>
+        <h2>Part 2 – Implementation Summary</h2>
 
+        <p><strong>2.1 Camera & Ray Geometry:</strong>  
+        I implemented a unified <code>transform()</code> that works for both NumPy and PyTorch, converting 3D points from camera to world coordinates. I added <code>pixel_to_camera()</code> to invert the pinhole model and used it inside <code>RaysData</code> to build ray origins and directions for every pixel across all training images.</p>
+        
+        <p><strong>2.2 Ray & Point Sampling:</strong>  
+        I wrote <code>RaysData</code> to flatten all training images into a single ray dataset stored on CPU. Each iteration samples a random batch of rays and only moves those rays to GPU. I implemented <code>sample_along_rays()</code> for stratified sampling between <code>near</code> and <code>far</code> bounds to produce (B, S, 3) 3D points along each ray.</p>
+        
+        <p><strong>2.3 Visualization:</strong>  
+        I added a <code>visualize_rays_and_samples()</code> helper using Viser that shows camera frustums, sampled rays, and 3D points. I ran it once for the screenshot deliverable.</p>
+        
+        <p><strong>2.4 NeRF Network:</strong>  
+        I implemented positional encoding and a standard NeRF MLP: 8 layers × 256 hidden units, with PE applied to both 3D points and view directions. The network outputs density (sigma) and RGB, using ReLU for sigma and sigmoid for color.</p>
+        
+        <p><strong>2.5 Volume Rendering & Training:</strong>  
+        I implemented the NeRF volume rendering equation (alphas, transmittance, and weighted RGB). The MSE loss is computed against the ground-truth pixel colors. I trained LEGO with global random ray sampling, computed validation PSNR, saved progress images, and stored all stats into <code>lego_stats.npz</code>.</p>
+        
+       
         <!-- Row of 2 images with individual captions -->
         <div class="image-row">
             <figure>
@@ -305,24 +318,27 @@ Training on mps for 2000 iters, batch size 10000
     <!-- ================= Part 2.6 ================= -->
     <section id="part2-6">
         <h2>Part 2.6</h2>
+        
+        <p><strong>Changed near/far bounds:</strong>  
+        My real setup is much smaller than LEGO, so I used <code>near=0.02</code> and <code>far=0.5</code> to ensure samples fall on the object.</p>
+        
+        <p><strong>Validation handling:</strong>  
+        My dataset sometimes has zero validation images, so I added a robust <code>has_val</code> check and disabled validation when needed, using a training pose for preview renders.</p>
+        
+        <p><strong>Memory adjustments:</strong>  
+        To avoid GPU OOM on the remote server, I kept all rays on CPU in <code>RaysData</code> and only transferred mini-batches to GPU each step.</p>
+        
+        <p><strong>Training:</strong>  
+        I kept the same NeRF architecture and hyperparameters as LEGO (64 samples, batch 10k, lr 5e-4). Training statistics were saved to <code>my_stats.npz</code> for plotting.</p>
+        
+        <p><strong>Orbit GIF:</strong>  
+        Instead of provided test poses, I generated new camera poses by rotating around one training camera position and rendered a 60-frame GIF for novel-view synthesis.</p>
 
-        <!-- GIF -->
-        <figure class="figure-single">
-            <img class="gif" src="part2_6_animation.gif" alt="Part 2.6 GIF">
-            <figcaption>Caption for Part 2.6 GIF</figcaption>
-        </figure>
+
+      
 
         <!-- Paragraph -->
-        <p>
-            <!-- TODO: Replace with your Part 2.6 explanation -->
-            This paragraph explains the results and observations for Part 2.6.
-        </p>
-
-        <!-- Single image with caption -->
-        <figure class="figure-single">
-            <img src="my_train.png" alt="Part 2.6 image 1">
-            <figcaption>Training loss over iterations</figcaption>
-        </figure>
+        
 
         <!-- Row of 6 images sharing one caption -->
         <figure class="image-row-shared-caption">
@@ -335,6 +351,16 @@ Training on mps for 2000 iters, batch size 10000
                 <img src="my_progress_iter_01000.png" alt="Part 2.6 row image 6">
             </div>
             <figcaption>Intermediate renders of the scene during training</figcaption>
+        </figure>
+          <!-- Single image with caption -->
+        <figure class="figure-single">
+            <img src="my_train.png" alt="Part 2.6 image 1">
+            <figcaption>Training loss over iterations</figcaption>
+        </figure>
+          <!-- GIF -->
+        <figure class="figure-single">
+            <img class="gif" src="part2_6_animation.gif" alt="Part 2.6 GIF">
+            <figcaption>Caption for Part 2.6 GIF</figcaption>
         </figure>
     </section>
 </body>
