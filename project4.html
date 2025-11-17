@@ -90,6 +90,17 @@
         .image-row-shared-caption figcaption {
             margin-top: 8px;
         }
+        .image-row-6 {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        
+        .image-row-6 img {
+            width: 15%;   /* ~6 images across with some gap */
+            height: auto;
+        }
+
 
         /* Simple styling for GIFs (optional, same as regular images) */
         .gif {
@@ -315,7 +326,7 @@ Training on mps for 2000 iters, batch size 10000
 
         <!-- Row of 6 images sharing one caption -->
         <figure class="image-row-shared-caption">
-            <div class="images">
+            <div class="image-row-6">
                 <img src="my_progress_iter_00001.png" alt="Part 2.6 row image 1">
                 <img src="my_progress_iter_00200.png" alt="Part 2.6 row image 2">
                 <img src="my_progress_iter_00400.png" alt="Part 2.6 row image 3">
