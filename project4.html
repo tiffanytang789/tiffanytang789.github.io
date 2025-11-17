@@ -335,6 +335,8 @@ Training on mps for 2000 iters, batch size 10000
         
         <p><strong>Orbit GIF:</strong>  
         Instead of provided test poses, I generated new camera poses by rotating around one training camera position and rendered a 60-frame GIF for novel-view synthesis.</p>
+        <p><strong>Reflection:</strong> 
+        There is an issue of rendering the GIF, however, I think this is more of data sampling issue rather than the model issue because I use the same model for lego and it worked. However, when it comes to my own dataset where lots of camera views are eliminated due to the tags getting blocked, it affected the overal rendering process. 
 
 
       
@@ -362,8 +364,8 @@ Training on mps for 2000 iters, batch size 10000
          
           <!-- GIF -->
         <figure class="figure-single">
-            <img class="gif" src="part2_6_animation.gif" alt="Part 2.6 GIF">
-            <figcaption>Caption for Part 2.6 GIF</figcaption>
+            <img class="gif" src="my_orbit.gif" alt="Part 2.6 GIF">
+            <figcaption>GIF for my own dataset</figcaption>
         </figure>
     </section>
 </body>
